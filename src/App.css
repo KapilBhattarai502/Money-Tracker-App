@@ -1,4 +1,58 @@
+*{
+  box-sizing: border-box;
+}
+body{
+ background-color: #17181F;
+ color: #ddd;
+}
 main{
   max-width: 360px;
-  margin: 0 auto;
+  margin: 30px auto;
+}
+h1{
+  text-align: center;
+  color: #fff;
+  margin: 0;
+}
+
+form{
+  margin-top: 20px;
+}
+
+form input{
+  width: 100%;
+}
+div.basic{
+  width: 100%;
+  display: flex;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+ form input{
+  background-color: transparent;
+  padding: 5px 7px;
+  border-radius: 5px;
+  color: #ddd;
+  border: 2px solid #30313d;
+  
+}
+form input[type="date"]{
+  color: #777;
+
+}
+form button{
+  width: 100%;
+  margin-top: 5px;
+  border: 0;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #ddd;
+}
+
+div.transaction{
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  margin: 10px 0 5px 0;
+
 }
