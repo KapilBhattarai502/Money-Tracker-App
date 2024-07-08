@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 const App = () => {
+  const[name,setName]=useState('');
   return (
     <main>
       <h1>
@@ -24,7 +25,7 @@ const App = () => {
 
           </div>
           <div className="right">
-          <div className="price">$500</div>
+          <div className="price red">-$500</div>
           <div className="datetime">2024-12-18 15:45</div>
 
 
@@ -32,12 +33,12 @@ const App = () => {
         </div>
         <div className="transaction">
           <div className="left">
-            <div className="name">New samsung Tv</div>
-            <div className="description">It was time for new Tv</div>
+            <div className="name">Ecommerce Website</div>
+            <div className="description">built a Ecommerce website for dad</div>
 
           </div>
           <div className="right">
-          <div className="price">$500</div>
+          <div className="price green">$500</div>
           <div className="datetime">2024-12-18 15:45</div>
 
 
@@ -45,12 +46,12 @@ const App = () => {
         </div>
         <div className="transaction">
           <div className="left">
-            <div className="name">New samsung Tv</div>
-            <div className="description">It was time for new Tv</div>
+            <div className="name">Washing Machine</div>
+            <div className="description">It was time for new washing machine</div>
 
           </div>
-          <div className="right">
-          <div className="price">$500</div>
+          <div className="right red">
+          <div className="price">-$900</div>
           <div className="datetime">2024-12-18 15:45</div>
           
 
