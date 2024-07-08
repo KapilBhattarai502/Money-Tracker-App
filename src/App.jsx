@@ -1,63 +1,96 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./App.css";
+
+import Displaydata from "./components/Displaydata";
 const App = () => {
-  const[name,setName]=useState('');
+  const [name, setName] = useState("");
+  const [datetime, setDatetime] = useState("");
+  const [description, setDescription] = useState("");
+  const [expensedata,setExpensedata]=useState([]);
+
+  useEffect(()=>{
+    fetch("http://localhost:5500/alltransactions").then((response)=>{
+        response.json().then((alltransactions)=>{
+            setExpensedata(alltransactions);
+  
+        })
+        
+    })
+},[expensedata])
+  
+ 
+
+  async function addNewTransaction(event) {
+    event.preventDefault();
+     fetch("http://localhost:5500/api/transaction",{
+     method:'POST',
+     headers:{'Content-type':'application/json'},
+     body:JSON.stringify({name,datetime,description}),
+    });
+    setDatetime('');
+    setDescription('');
+    setName('');
+  
+
+
+  }
+ 
+
+  let balance=0;
+  for(let expense of expensedata){
+    balance=balance+parseFloat(expense.name.split(' ')[0]);
+
+  }
+  
+ 
+
   return (
     <main>
       <h1>
-        $400<span>.00</span>
+        ${balance}<span>.00</span>
       </h1>
-      <form>
+      <form onSubmit={addNewTransaction}>
         <div className="basic">
-          <input type="text" placeholder="+200 New samsung Tv" />
-          <input type="date" />
+          <input
+            type="text"
+            placeholder="+200 New samsung Tv"
+           
+            
+            onChange={(event) => {
+              setName(event.target.value);
+            }}
+             value={name}
+             required
+          />
+          <input
+            type="date"
+          
+           
+            onChange={(event) => {
+              setDatetime(event.target.value);
+            }} 
+            value={datetime}
+            required
+          />
         </div>
-        <div className="description">
-          <input type="text" placeholder="description" />
+        <div
+          className="description"
+          
+          onChange={(event) => {
+            setDescription(event.target.value);
+          }} 
+        >
+          <input type="text" placeholder="description" value={description} required/>
         </div>
         <button type="submit">Add New Transaction</button>
       </form>
       <div className="transactions">
-        <div className="transaction">
-          <div className="left">
-            <div className="name">New samsung Tv</div>
-            <div className="description">It was time for new Tv</div>
+      {
+        expensedata.map((item,index)=>{
+            return <Displaydata key={index} {...item}/>
 
-          </div>
-          <div className="right">
-          <div className="price red">-$500</div>
-          <div className="datetime">2024-12-18 15:45</div>
-
-
-          </div>
-        </div>
-        <div className="transaction">
-          <div className="left">
-            <div className="name">Ecommerce Website</div>
-            <div className="description">built a Ecommerce website for dad</div>
-
-          </div>
-          <div className="right">
-          <div className="price green">$500</div>
-          <div className="datetime">2024-12-18 15:45</div>
-
-
-          </div>
-        </div>
-        <div className="transaction">
-          <div className="left">
-            <div className="name">Washing Machine</div>
-            <div className="description">It was time for new washing machine</div>
-
-          </div>
-          <div className="right red">
-          <div className="price">-$900</div>
-          <div className="datetime">2024-12-18 15:45</div>
-          
-
-
-          </div>
-        </div>
+        })
+     }
       </div>
     </main>
   );
