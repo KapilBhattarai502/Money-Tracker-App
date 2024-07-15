@@ -47,7 +47,7 @@ const App = () => {
   return (
     <main>
       <h1>
-        ${balance}<span>.00</span>
+        Rs {balance}
       </h1>
       <form onSubmit={addNewTransaction}>
         <div className="basic">
